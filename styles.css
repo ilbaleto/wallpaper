@@ -9,6 +9,10 @@ body {
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
+input {
+	font-size: 16px;
+}
+
 input[type="number"] {
 	width: 3em;
 }
