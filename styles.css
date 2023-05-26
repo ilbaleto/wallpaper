@@ -7,11 +7,9 @@
 body {
 	font-family: 'Nanum Gothic Coding', monospace;
 	font-family: 'Noto Sans KR', sans-serif;
+	background-color: ivory;
 }
 
-input {
-	font-size: 16px;
-}
 
 input[type="number"] {
 	width: 3em;
