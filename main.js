@@ -1,69 +1,105 @@
 
-let house = document.forms.house;
+let _ht = document.querySelector("#h input:nth-of-type(1)");
+let _hx = document.querySelector("#h input:nth-of-type(2)");
+let _r1x = document.querySelector("#r1 input:nth-of-type(1)");
+let _r1y = document.querySelector("#r1 input:nth-of-type(2)");
+let _r2x = document.querySelector("#r2 input:nth-of-type(1)");
+let _r2y = document.querySelector("#r2 input:nth-of-type(2)");
+let _r3x = document.querySelector("#r3 input:nth-of-type(1)");
+let _r3y = document.querySelector("#r3 input:nth-of-type(2)");
+let _r4x = document.querySelector("#r4 input:nth-of-type(1)");
+let _r4y = document.querySelector("#r4 input:nth-of-type(2)");
+let _lvx1 = document.querySelector("#lv input:nth-of-type(1)");
+let _lvy1 = document.querySelector("#lv input:nth-of-type(2)");
+let _lvx2 = document.querySelector("#lv input:nth-of-type(3)");
+let _lvy2 = document.querySelector("#lv input:nth-of-type(4)");
+let _lvx3 = document.querySelector("#lv input:nth-of-type(5)");
+let _lvy3 = document.querySelector("#lv input:nth-of-type(6)");
+let _lvx4 = document.querySelector("#lv input:nth-of-type(7)");
+let _lvy4 = document.querySelector("#lv input:nth-of-type(8)");
 
-let h = document.getElementById("h");
-let r1 = document.getElementById("r1");
-let r2 = document.getElementById("r2");
-let r3 = document.getElementById("r3");
-let r4 = document.getElementById("r4");
+let _select = document.getElementById("select");
+let calbt = document.getElementById("calbt");
+let print = document.getElementById("print");
 
-let paper = document.getElementById("paper");
-let cal = document.getElementById("cal");
-let res = document.getElementById("res");
 
-let wp;
-
-function parseone (el) {
-  return parseInt(el.children[1].value) || 0;
-}
-function parsetwo (el) {
-  return parseInt(el.children[2].value) || 0;
-}
-function parsethr (el) {
-  return parseInt(el.children[4].value) || 0;
-}
-function roomw (el) {
-  if (parseone(el) == 0 || parsetwo(el) == 0) return 0;
-  let i1 = ((parseone(el) % wp) < (wp / 2 - 5)) ? 1 : 0;
-  let i2 = ((parsetwo(el) % wp) < (wp / 2 - 5)) ? 1 : 0;
-  return parseInt(parseone(el) / wp) * 2 + parseInt(parsetwo(el) / wp) * 2 + 3 - i1 - i2 - parsethr(el);  
-}
-function roomf (el) {
-  if (parseone(el) == 0 || parsetwo(el) == 0) return [0, 0];  
-  let cut = ((parseone(el) < parsetwo(el)) ? parseone(el) : parsetwo(el)) + 10;
-  let i = (parseone(el) > parsetwo(el)) ? parseone(el) : parsetwo(el);
-  let dim = parseInt(i / wp) + 1;
-  return [cut, dim];
+function valueNum (el) {
+  return parseInt(el.value) || 0;
 }
 
-cal.onclick = function () {
-  let h1, h2, rw1, rw2, rw3, rw4, rf1, rf2, rf3, rf4, lw, lf;
-  if (paper.value == 'sw') {
-    wp = 53;
-  } else if (paper.value == 'lw') {
-    wp = 93;
+
+
+calbt.onclick = function () {
+  let ht = valueNum(_ht);
+  let hx = valueNum(_hx);
+  let r1x = valueNum(_r1x);
+  let r1y = valueNum(_r1y);
+  let r2x = valueNum(_r2x);
+  let r2y = valueNum(_r2y);
+  let r3x = valueNum(_r3x);
+  let r3y = valueNum(_r3y);
+  let r4x = valueNum(_r4x);
+  let r4y = valueNum(_r4y);
+  let lvx1 = valueNum(_lvx1);
+  let lvy1 = valueNum(_lvy1);
+  let lvx2 = valueNum(_lvx2);
+  let lvy2 = valueNum(_lvy2);
+  let lvx3 = valueNum(_lvx3);
+  let lvy3 = valueNum(_lvy3);
+  let lvx4 = valueNum(_lvx4);
+  let lvy4 = valueNum(_lvy4);
+  let select = (_select.value == 'sw') ? 53 : (_select.value == 'lw') ? 93 : 106
+
+  let r_side = (r1x + r1y + r2x + r2y + r3x + r3y + r4x + r4y) * 2 * ht;
+  let l_side = (lvx1 + lvy1 + lvx2 + lvy2 + lvx3 + lvy3 + lvx4 + lvy4) * 2 * ht;
+  let r_ceil = r1x * r1y + r2x * r2y + r3x * r3y + r4x * r4y;
+  let l_ceil = lvx1 * lvy1 + lvx2 * lvy2 + lvx3 * lvy3 + lvx4 * lvy4;
+  let r_sidePP = +( r_side / 33000 ).toFixed(2);
+  let r_ceilPP =  +( r_ceil / 33000 ).toFixed(2);
+  let l_sidePP = +( l_side / 33000 ).toFixed(2);
+  let l_ceilPP = +( l_ceil / 33000).toFixed(2);
+  let cut_roll, r_side_roll, r_side_cake, l_side_roll, l_side_cake, r_ceil_roll, l_ceil_roll;
+
+  if (select == 53) {
+    cut_roll = parseInt(1250 / ht);
+    r_side_cake = Math.ceil(r_side / ( ht * 53 ));
+    r_side_roll = +(r_side_cake / cut_roll).toFixed(2);
+    l_side_cake = Math.ceil(l_side / ( ht * 53 ));
+    l_side_roll = +(l_side_cake / cut_roll).toFixed(2);
+    r_ceil_roll = +(r_ceil / (1250 * 53)).toFixed(2);
+    l_ceil_roll = +(l_ceil / (1250 * 53)).toFixed(2);
+  } else if (select == 93) {
+    cut_roll = parseInt(1775 / ht);
+    r_side_cake = Math.ceil(r_side / ( ht * 93 ));
+    r_side_roll = +(r_side_cake / cut_roll).toFixed(2);
+    l_side_cake = Math.ceil(l_side / ( ht * 93 ));
+    l_side_roll = +(l_side_cake / cut_roll).toFixed(2);
+    r_ceil_roll = +(r_ceil / (1775 * 93)).toFixed(2);
+    l_ceil_roll = +(l_ceil / (1775 * 93)).toFixed(2);
   } else {
-    wp = 106;
+    cut_roll = parseInt(1560 / ht);
+    r_side_cake = Math.ceil(r_side / ( ht * 106 ));
+    r_side_roll = +(r_side_cake / cut_roll).toFixed(2);
+    l_side_cake = Math.ceil(l_side / ( ht * 106 ));
+    l_side_roll = +(l_side_cake / cut_roll).toFixed(2);
+    r_ceil_roll = +(r_ceil / (1560 * 106)).toFixed(2);
+    l_ceil_roll = +(l_ceil / (1560 * 106)).toFixed(2);  
   }
-  h1 = parseone(h);
-  h2 = parsetwo(h);
-  rw1 = roomw(r1);
-  rf1 = roomf(r1);
-  rw2 = roomw(r2);
-  rf2 = roomf(r2);
-  rw3 = roomw(r3);
-  rf3 = roomf(r3);
-  rw4 = roomw(r4);
-  rf4 = roomf(r4);
-  lw = roomw(liv);
-  lf = roomf(liv);
 
-  res.innerHTML = "<div>방1 : " + rw1 + "폭 - 천장 " + rf1[0]+ "cm " + rf1[1] + "폭</div>" +
-                  "<div>방2 : " + rw2 + "폭 - 천장 " + rf2[0]+ "cm " + rf2[1] + "폭</div>" +
-                  "<div>방3 : " + rw3 + "폭 - 천장 " + rf3[0]+ "cm " + rf3[1] + "폭</div>" +
-                  "<div>방4 : " + rw4 + "폭 - 천장 " + rf4[0]+ "cm " + rf4[1] + "폭</div>" +
-                  "<div>거실 : " + lw + "폭 - 천장 " + lf[0]+ "cm " + lf[1] + "폭</div>" +
-                  "<h2>합계 : " + (rw1 + rw2 + rw3 + rw4 + lw) + "폭 - 천장 " + rf4[0]+ "cm " + rf4[1] + "폭</h2>";
+  let s_ceilPP = +(r_ceilPP + l_ceilPP).toFixed(2);
+  let s_ceil_roll = +(r_ceil_roll + l_ceil_roll).toFixed(2);
+  let s_sidePP = +(r_sidePP + l_sidePP).toFixed(2);
+  let s_side_roll = +(r_side_roll + l_side_roll).toFixed(2);
+  let s_side_cake = r_side_cake + l_side_cake;
+
+
+  let resultContext = `
+  R_Ceil: ${r_ceilPP}P(${r_ceil_roll}R) R_Side: ${r_sidePP}P(${r_side_roll}R)${r_side_cake}C<br>
+  L_Ceil: ${l_ceilPP}P(${l_ceil_roll}R) L_Side: ${l_sidePP}P(${l_side_roll}R)${l_side_cake}C<br>
+  S_Ceil: ${s_ceilPP}P(${s_ceil_roll}R) S_Side: ${s_sidePP}P(${s_side_roll}R)${s_side_cake}C
+  `;
+
+  print.innerHTML = resultContext;
 
 
 }
