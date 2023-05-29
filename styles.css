@@ -10,6 +10,13 @@ body {
 	background-color: ivory;
 }
 
+input[type="text"] {
+	width: 200px;
+	height: 24px;
+	margin: ;
+	font-size: 18px;
+}
+
 
 input[type="number"] {
 	width: 3em;
