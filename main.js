@@ -37,13 +37,11 @@ let l3s = document.getElementById("l3s");
 let l4c = document.getElementById("l4c");
 let l4s = document.getElementById("l4s");
 
-let _saved = document.getElementById("saved");
+let saved_select = document.getElementById("saved");
 let _select = document.getElementById("select");
-let calbt = document.getElementById("calbt");
-let print = document.getElementById("print");
+let savebtn = document.getElementById("savebtn");
 
 let locKey = document.getElementById("location");
-let myData;
 let storage = localStorage;
 
 
@@ -65,7 +63,7 @@ window.addEventListener("load", function() {
     option.textContent = storage.key(i);
     docFrag.appendChild(option);
   }
-  _saved.appendChild(docFrag);
+  saved_select.appendChild(docFrag);
 
 
 });
@@ -198,11 +196,11 @@ house.addEventListener('change', function(e) {
 
 });
 
-_saved.addEventListener('change', function(e) {
+saved_select.addEventListener('change', function(e) {
 
-  if (!storage.getItem(_saved.value)) return;
+  if (!storage.getItem(saved_select.value)) return;
 
-  let data = JSON.parse(storage.getItem(_saved.value))
+  let data = JSON.parse(storage.getItem(saved_select.value))
 
   locKey.value = data.location;
   h.children[1].value = data.ht;
@@ -244,9 +242,9 @@ _saved.addEventListener('change', function(e) {
 });
 
 
-calbt.onclick = function () {
+savebtn.onclick = function () {
 
-  myData = {
+  let myData = {
     location: locKey.value,
     ht: h.children[1].value,
     hx: h.children[2].value,
