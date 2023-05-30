@@ -9,10 +9,15 @@
   <body>
     <h2>견적내기</h2>
     <div>
-      <form name="house">
+      <form id="house">
         <fieldset>
           <legend>Please select your preferred contact method:</legend>
-          <h3>위치: <input type="text" id="location" placeholder="Loctaion"></h3>
+          <h3><input type="text" id="location" placeholder="Loctaion"></h3>
+          <select id="select" class="select">
+            <option value="sw">소폭합지</option>
+            <option value="lw">광푝합지</option>
+            <option value="lp">실크벽지</option>
+          </select>     
           <div id="h">
             <label>Ht </label>
             <input type="number">
@@ -77,12 +82,10 @@
         </fieldset>
       </form>
       <div>
-        <select id="select" class="select">
-          <option value="sw">소폭합지</option>
-          <option value="lw">광푝합지</option>
-          <option value="lp">실크벽지</option>
-        </select>            
-        <input type="button" id="calbt" class ="btn" value="Calculate">
+        <select id ="saved" class="mysel">
+          <option>Saved Location</option>
+        </select>       
+        <input type="button" id="calbt" class ="btn" value="Saved">
       </div>
     </div>
     <script src="main.js"></script>

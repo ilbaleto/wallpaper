@@ -11,7 +11,7 @@ body {
 }
 
 input[type="text"] {
-	width: 200px;
+	width: 180px;
 	height: 24px;
 	margin: ;
 	font-size: 18px;
@@ -37,6 +37,7 @@ input::-webkit-inner-spin-button {
   border: 2px solid #000;
   font-family: 'Lato', sans-serif;
   font-weight: 500;
+  font-size: 18px;
   background: transparent;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -47,8 +48,14 @@ input::-webkit-inner-spin-button {
   appearance: none;
 }
 
-.select {
-	margin: 10px;
-	padding: 5px 10px;
+select {
+	margin: 5px;
+	padding: 3px 6px;
 
 }
+
+h3 {
+	display: inline-block;
+}
+
+

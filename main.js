@@ -1,4 +1,6 @@
 
+let house = document.getElementById("house");
+
 let _ht = document.querySelector("#h input:nth-of-type(1)");
 let _hx = document.querySelector("#h input:nth-of-type(2)");
 let _r1x = document.querySelector("#r1 input:nth-of-type(1)");
@@ -35,18 +37,41 @@ let l3s = document.getElementById("l3s");
 let l4c = document.getElementById("l4c");
 let l4s = document.getElementById("l4s");
 
+let _saved = document.getElementById("saved");
 let _select = document.getElementById("select");
 let calbt = document.getElementById("calbt");
 let print = document.getElementById("print");
+
+let locKey = document.getElementById("location");
+let myData;
+let storage = localStorage;
 
 
 function valueNum (el) {
   return parseInt(el.value) || 0;
 }
 
+function matchRexZero (el) {
+ let re = /^0/;
+ return (re.test(el)) ? '' : el;
+}
 
 
-document.body.addEventListener('change', function(e) {
+window.addEventListener("load", function() {
+
+  let docFrag = document.createDocumentFragment();
+  for (let i = 0; i < storage.length; i++) {
+    let option = document.createElement("option");
+    option.textContent = storage.key(i);
+    docFrag.appendChild(option);
+  }
+  _saved.appendChild(docFrag);
+
+
+});
+
+
+house.addEventListener('change', function(e) {
   let ht = valueNum(_ht);
   let hx = valueNum(_hx);
   let r1x = valueNum(_r1x);
@@ -134,26 +159,134 @@ document.body.addEventListener('change', function(e) {
   let l4_side_cake = Math.ceil(l4_side / (ht * select));
   let l4_side_roll = +(l4_side_cake / cut_roll).toFixed(2);
 
-  r1c.textContent = `${r1_ceilPP}평[${r1_ceil_roll}롤]`;
-  r1s.textContent = `${r1_sidePP}평[${r1_side_roll}롤][${r1_side_cake}폭]`;
-  r2c.textContent = `${r2_ceilPP}평[${r2_ceil_roll}롤]`;
-  r2s.textContent = `${r2_sidePP}평[${r2_side_roll}롤][${r2_side_cake}폭]`;
-  r3c.textContent = `${r3_ceilPP}평[${r3_ceil_roll}롤]`;
-  r3s.textContent = `${r3_sidePP}평[${r3_side_roll}롤][${r3_side_cake}폭]`;
-  r4c.textContent = `${r4_ceilPP}평[${r4_ceil_roll}롤]`;
-  r4s.textContent = `${r4_sidePP}평[${r4_side_roll}롤][${r4_side_cake}폭]`;
-  l1c.textContent = `${l1_ceilPP}평[${l1_ceil_roll}롤]`;
-  l1s.textContent = `${l1_sidePP}평[${l1_side_roll}롤][${l1_side_cake}폭]`;
-  l2c.textContent = `${l2_ceilPP}평[${l2_ceil_roll}롤]`;
-  l2s.textContent = `${l2_sidePP}평[${l2_side_roll}롤][${l2_side_cake}폭]`;
-  l3c.textContent = `${l3_ceilPP}평[${l3_ceil_roll}롤]`;
-  l3s.textContent = `${l3_sidePP}평[${l3_side_roll}롤][${l4_side_cake}폭]`;
-  l4c.textContent = `${l4_ceilPP}평[${l4_ceil_roll}롤]`;
-  l4s.textContent = `${l4_sidePP}평[${l4_side_roll}롤][${l4_side_cake}폭]`;    
+
+  r1cText = `${r1_ceilPP}평[${r1_ceil_roll}롤]`;
+  r1sText = `${r1_sidePP}평[${r1_side_roll}롤][${r1_side_cake}폭]`;
+  r2cText = `${r2_ceilPP}평[${r2_ceil_roll}롤]`;
+  r2sText = `${r2_sidePP}평[${r2_side_roll}롤][${r2_side_cake}폭]`;
+  r3cText = `${r3_ceilPP}평[${r3_ceil_roll}롤]`;
+  r3sText = `${r3_sidePP}평[${r3_side_roll}롤][${r3_side_cake}폭]`;
+  r4cText = `${r4_ceilPP}평[${r4_ceil_roll}롤]`;
+  r4sText = `${r4_sidePP}평[${r4_side_roll}롤][${r4_side_cake}폭]`;
+  l1cText = `${l1_ceilPP}평[${l1_ceil_roll}롤]`;
+  l1sText = `${l1_sidePP}평[${l1_side_roll}롤][${l1_side_cake}폭]`;
+  l2cText = `${l2_ceilPP}평[${l2_ceil_roll}롤]`;
+  l2sText = `${l2_sidePP}평[${l2_side_roll}롤][${l2_side_cake}폭]`;
+  l3cText = `${l3_ceilPP}평[${l3_ceil_roll}롤]`;
+  l3sText = `${l3_sidePP}평[${l3_side_roll}롤][${l4_side_cake}폭]`;
+  l4cText = `${l4_ceilPP}평[${l4_ceil_roll}롤]`;
+  l4sText = `${l4_sidePP}평[${l4_side_roll}롤][${l4_side_cake}폭]`;
+
+  r1c.textContent = matchRexZero(r1cText);
+  r1s.textContent = matchRexZero(r1sText);
+  r2c.textContent = matchRexZero(r2cText);
+  r2s.textContent = matchRexZero(r2sText);
+  r3c.textContent = matchRexZero(r3cText);
+  r3s.textContent = matchRexZero(r3sText);
+  r4c.textContent = matchRexZero(r4cText);
+  r4s.textContent = matchRexZero(r4sText);
+  l1c.textContent = matchRexZero(l1cText);
+  l1s.textContent = matchRexZero(l1sText);
+  l2c.textContent = matchRexZero(l2cText);
+  l2s.textContent = matchRexZero(l2sText);
+  l3c.textContent = matchRexZero(l3cText);
+  l3s.textContent = matchRexZero(l3sText);
+  l4c.textContent = matchRexZero(l4cText);
+  l4s.textContent = matchRexZero(l4sText);
+
+
 
 });
 
+_saved.addEventListener('change', function(e) {
+
+  if (!storage.getItem(_saved.value)) return;
+
+  let data = JSON.parse(storage.getItem(_saved.value))
+
+  locKey.value = data.location;
+  h.children[1].value = data.ht;
+  h.children[2].value = data.hx;
+  r1.children[1].value = data.r1x;
+  r1.children[2].value = data.r1y;
+  r2.children[1].value = data.r2x;
+  r2.children[2].value = data.r2y;
+  r3.children[1].value = data.r3x;
+  r3.children[2].value = data.r3y;
+  r4.children[1].value = data.r4x;
+  r4.children[2].value = data.r4y;
+  l1.children[1].value = data.l1x;
+  l1.children[2].value = data.l1y;
+  l2.children[1].value = data.l2x;
+  l2.children[2].value = data.l2y;
+  l3.children[1].value = data.l3x;
+  l3.children[2].value = data.l3y;
+  l4.children[1].value = data.l4x;
+  l4.children[2].value = data.l4y;
+  r1c.textContent = data.r1c;
+  r1s.textContent = data.r1s;
+  r2c.textContent = data.r2c;
+  r2s.textContent = data.r2s;
+  r3c.textContent = data.r3c;
+  r3s.textContent = data.r3s;
+  r4c.textContent = data.r4c;
+  r4s.textContent = data.r4s;
+  l1c.textContent = data.l1c;
+  l1s.textContent = data.l1s;
+  l2c.textContent = data.l2c;
+  l2s.textContent = data.l2s;
+  l3c.textContent = data.l3c;
+  l3s.textContent = data.l3s;
+  l4c.textContent = data.l4c;
+  l4s.textContent = data.l4s;
+  _select.value = data._select;
+
+});
+
+
 calbt.onclick = function () {
 
+  myData = {
+    location: locKey.value,
+    ht: h.children[1].value,
+    hx: h.children[2].value,
+    r1x: r1.children[1].value,
+    r1y: r1.children[2].value,
+    r2x: r2.children[1].value,
+    r2y: r2.children[2].value,
+    r3x: r3.children[1].value,
+    r3y: r3.children[2].value,
+    r4x: r4.children[1].value,
+    r4y: r4.children[2].value,
+    l1x: l1.children[1].value,
+    l1y: l1.children[2].value,
+    l2x: l2.children[1].value,
+    l2y: l2.children[2].value,
+    l3x: l3.children[1].value,
+    l3y: l3.children[2].value,
+    l4x: l4.children[1].value,
+    l4y: l4.children[2].value,
+    r1c: r1c.textContent,
+    r1s: r1s.textContent,
+    r2c: r2c.textContent,
+    r2s: r2s.textContent,
+    r3c: r3c.textContent,
+    r3s: r3s.textContent,
+    r4c: r4c.textContent,
+    r4s: r4s.textContent,
+    l1c: l1c.textContent,
+    l1s: l1s.textContent,
+    l2c: l2c.textContent,
+    l2s: l2s.textContent,
+    l3c: l3c.textContent,
+    l3s: l3s.textContent,
+    l4c: l4c.textContent,
+    l4s: l4s.textContent,
+    _select: _select.value
+  };
+
+  if (locKey.value) {
+    storage.setItem( locKey.value, JSON.stringify(myData));
+  }
 
 }
