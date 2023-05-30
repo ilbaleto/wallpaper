@@ -18,6 +18,23 @@ let _l3y = document.querySelector("#l3 input:nth-of-type(2)");
 let _l4x = document.querySelector("#l4 input:nth-of-type(1)");
 let _l4y = document.querySelector("#l4 input:nth-of-type(2)");
 
+let r1c = document.getElementById("r1c");
+let r1s = document.getElementById("r1s");
+let r2c = document.getElementById("r2c");
+let r2s = document.getElementById("r2s");
+let r3c = document.getElementById("r3c");
+let r3s = document.getElementById("r3s");
+let r4c = document.getElementById("r4c");
+let r4s = document.getElementById("r4s");
+let l1c = document.getElementById("l1c");
+let l1s = document.getElementById("l1s");
+let l2c = document.getElementById("l2c");
+let l2s = document.getElementById("l2s");
+let l3c = document.getElementById("l3c");
+let l3s = document.getElementById("l3s");
+let l4c = document.getElementById("l4c");
+let l4s = document.getElementById("l4s");
+
 let _select = document.getElementById("select");
 let calbt = document.getElementById("calbt");
 let print = document.getElementById("print");
@@ -29,7 +46,7 @@ function valueNum (el) {
 
 
 
-calbt.onclick = function () {
+document.body.addEventListener('change', function(e) {
   let ht = valueNum(_ht);
   let hx = valueNum(_hx);
   let r1x = valueNum(_r1x);
@@ -48,58 +65,95 @@ calbt.onclick = function () {
   let l3y = valueNum(_l3y);
   let l4x = valueNum(_l4x);
   let l4y = valueNum(_l4y);
-  let select = (_select.value == 'sw') ? 53 : (_select.value == 'lw') ? 93 : 106
-
-  let r_side = (r1x + r1y + r2x + r2y + r3x + r3y + r4x + r4y) * 2 * ht;
-  let l_side = (l1x + l1y + l2x + l2y + l3x + l3y + l4x + l4y) * 2 * ht;
-  let r_ceil = r1x * r1y + r2x * r2y + r3x * r3y + r4x * r4y;
-  let l_ceil = l1x * l1y + l2x * l2y + l3x * l3y + l4x * l4y;
-  let r_sidePP = +( r_side / 33000 ).toFixed(2);
-  let r_ceilPP =  +( r_ceil / 33000 ).toFixed(2);
-  let l_sidePP = +( l_side / 33000 ).toFixed(2);
-  let l_ceilPP = +( l_ceil / 33000).toFixed(2);
-  let cut_roll, r_side_roll, r_side_cake, l_side_roll, l_side_cake, r_ceil_roll, l_ceil_roll;
-
-  if (select == 53) {
-    cut_roll = parseInt(1250 / ht);
-    r_side_cake = Math.ceil(r_side / ( ht * 53 ));
-    r_side_roll = +(r_side_cake / cut_roll).toFixed(2);
-    l_side_cake = Math.ceil(l_side / ( ht * 53 ));
-    l_side_roll = +(l_side_cake / cut_roll).toFixed(2);
-    r_ceil_roll = +(r_ceil / (1250 * 53)).toFixed(2);
-    l_ceil_roll = +(l_ceil / (1250 * 53)).toFixed(2);
-  } else if (select == 93) {
-    cut_roll = parseInt(1775 / ht);
-    r_side_cake = Math.ceil(r_side / ( ht * 93 ));
-    r_side_roll = +(r_side_cake / cut_roll).toFixed(2);
-    l_side_cake = Math.ceil(l_side / ( ht * 93 ));
-    l_side_roll = +(l_side_cake / cut_roll).toFixed(2);
-    r_ceil_roll = +(r_ceil / (1775 * 93)).toFixed(2);
-    l_ceil_roll = +(l_ceil / (1775 * 93)).toFixed(2);
-  } else {
-    cut_roll = parseInt(1560 / ht);
-    r_side_cake = Math.ceil(r_side / ( ht * 106 ));
-    r_side_roll = +(r_side_cake / cut_roll).toFixed(2);
-    l_side_cake = Math.ceil(l_side / ( ht * 106 ));
-    l_side_roll = +(l_side_cake / cut_roll).toFixed(2);
-    r_ceil_roll = +(r_ceil / (1560 * 106)).toFixed(2);
-    l_ceil_roll = +(l_ceil / (1560 * 106)).toFixed(2);  
-  }
-
-  let s_ceilPP = +(r_ceilPP + l_ceilPP).toFixed(2);
-  let s_ceil_roll = +(r_ceil_roll + l_ceil_roll).toFixed(2);
-  let s_sidePP = +(r_sidePP + l_sidePP).toFixed(2);
-  let s_side_roll = +(r_side_roll + l_side_roll).toFixed(2);
-  let s_side_cake = r_side_cake + l_side_cake;
+  let select = (_select.value == 'sw') ? 53 : (_select.value == 'lw') ? 93 : 106;
+  let roll_size = (select == 53) ? 1250 : (select == 93) ? 1775 : 1560;
+  let cut_roll = parseInt(roll_size / ht);
 
 
-  let resultContext = `
-  R_Ceil: ${r_ceilPP}P(${r_ceil_roll}R) R_Side: ${r_sidePP}P(${r_side_roll}R)${r_side_cake}C<br>
-  L_Ceil: ${l_ceilPP}P(${l_ceil_roll}R) L_Side: ${l_sidePP}P(${l_side_roll}R)${l_side_cake}C<br>
-  S_Ceil: ${s_ceilPP}P(${s_ceil_roll}R) S_Side: ${s_sidePP}P(${s_side_roll}R)${s_side_cake}C
-  `;
+  let r1_ceil = r1x * r1y;
+  let r1_side = (r1x + r1y) * 2 * ht;
+  let r1_ceilPP = +(r1_ceil / 33000).toFixed(2);
+  let r1_sidePP = +(r1_side /33000).toFixed(2);
+  let r1_ceil_roll = +(r1_ceil / (roll_size * select)).toFixed(2);
+  let r1_side_cake = Math.ceil(r1_side / (ht * select));
+  let r1_side_roll = +(r1_side_cake / cut_roll).toFixed(2);
 
-  print.innerHTML = resultContext;
+  let r2_ceil = r2x * r2y;
+  let r2_side = (r2x + r2y) * 2 * ht;
+  let r2_ceilPP = +(r2_ceil / 33000).toFixed(2);
+  let r2_sidePP = +(r2_side /33000).toFixed(2);
+  let r2_ceil_roll = +(r2_ceil / (roll_size * select)).toFixed(2);
+  let r2_side_cake = Math.ceil(r2_side / (ht * select));
+  let r2_side_roll = +(r2_side_cake / cut_roll).toFixed(2);
+
+  let r3_ceil = r3x * r3y;
+  let r3_side = (r3x + r3y) * 2 * ht;
+  let r3_ceilPP = +(r3_ceil / 33000).toFixed(2);
+  let r3_sidePP = +(r3_side /33000).toFixed(2);
+  let r3_ceil_roll = +(r3_ceil / (roll_size * select)).toFixed(2);
+  let r3_side_cake = Math.ceil(r3_side / (ht * select));
+  let r3_side_roll = +(r3_side_cake / cut_roll).toFixed(2);
+
+  let r4_ceil = r4x * r4y;
+  let r4_side = (r4x + r4y) * 2 * ht;
+  let r4_ceilPP = +(r4_ceil / 33000).toFixed(2);
+  let r4_sidePP = +(r4_side /33000).toFixed(2);
+  let r4_ceil_roll = +(r4_ceil / (roll_size * select)).toFixed(2);
+  let r4_side_cake = Math.ceil(r4_side / (ht * select));
+  let r4_side_roll = +(r4_side_cake / cut_roll).toFixed(2);
+
+  let l1_ceil = l1x * l1y;
+  let l1_side = (l1x + l1y) * 2 * ht;
+  let l1_ceilPP = +(l1_ceil / 33000).toFixed(2);
+  let l1_sidePP = +(l1_side /33000).toFixed(2);
+  let l1_ceil_roll = +(l1_ceil / (roll_size * select)).toFixed(2);
+  let l1_side_cake = Math.ceil(l1_side / (ht * select));
+  let l1_side_roll = +(l1_side_cake / cut_roll).toFixed(2);
+
+  let l2_ceil = l2x * l2y;
+  let l2_side = (l2x + l2y) * 2 * ht;
+  let l2_ceilPP = +(l2_ceil / 33000).toFixed(2);
+  let l2_sidePP = +(l2_side /33000).toFixed(2);
+  let l2_ceil_roll = +(l2_ceil / (roll_size * select)).toFixed(2);
+  let l2_side_cake = Math.ceil(l2_side / (ht * select));
+  let l2_side_roll = +(l2_side_cake / cut_roll).toFixed(2);
+
+  let l3_ceil = l3x * l3y;
+  let l3_side = (l3x + l3y) * 2 * ht;
+  let l3_ceilPP = +(l3_ceil / 33000).toFixed(2);
+  let l3_sidePP = +(l3_side /33000).toFixed(2);
+  let l3_ceil_roll = +(l3_ceil / (roll_size * select)).toFixed(2);
+  let l3_side_cake = Math.ceil(l3_side / (ht * select));
+  let l3_side_roll = +(l3_side_cake / cut_roll).toFixed(2);
+
+  let l4_ceil = l4x * l4y;
+  let l4_side = (l4x + l4y) * 2 * ht;
+  let l4_ceilPP = +(l4_ceil / 33000).toFixed(2);
+  let l4_sidePP = +(l4_side /33000).toFixed(2);
+  let l4_ceil_roll = +(l4_ceil / (roll_size * select)).toFixed(2);
+  let l4_side_cake = Math.ceil(l4_side / (ht * select));
+  let l4_side_roll = +(l4_side_cake / cut_roll).toFixed(2);
+
+  r1c.textContent = `${r1_ceilPP}평[${r1_ceil_roll}롤]`;
+  r1s.textContent = `${r1_sidePP}평[${r1_side_roll}롤][${r1_side_cake}폭]`;
+  r2c.textContent = `${r2_ceilPP}평[${r2_ceil_roll}롤]`;
+  r2s.textContent = `${r2_sidePP}평[${r2_side_roll}롤][${r2_side_cake}폭]`;
+  r3c.textContent = `${r3_ceilPP}평[${r3_ceil_roll}롤]`;
+  r3s.textContent = `${r3_sidePP}평[${r3_side_roll}롤][${r3_side_cake}폭]`;
+  r4c.textContent = `${r4_ceilPP}평[${r4_ceil_roll}롤]`;
+  r4s.textContent = `${r4_sidePP}평[${r4_side_roll}롤][${r4_side_cake}폭]`;
+  l1c.textContent = `${l1_ceilPP}평[${l1_ceil_roll}롤]`;
+  l1s.textContent = `${l1_sidePP}평[${l1_side_roll}롤][${l1_side_cake}폭]`;
+  l2c.textContent = `${l2_ceilPP}평[${l2_ceil_roll}롤]`;
+  l2s.textContent = `${l2_sidePP}평[${l2_side_roll}롤][${l2_side_cake}폭]`;
+  l3c.textContent = `${l3_ceilPP}평[${l3_ceil_roll}롤]`;
+  l3s.textContent = `${l3_sidePP}평[${l3_side_roll}롤][${l4_side_cake}폭]`;
+  l4c.textContent = `${l4_ceilPP}평[${l4_ceil_roll}롤]`;
+  l4s.textContent = `${l4_sidePP}평[${l4_side_roll}롤][${l4_side_cake}폭]`;    
+
+});
+
+calbt.onclick = function () {
 
 
 }
