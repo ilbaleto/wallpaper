@@ -55,10 +55,9 @@ function matchRexZero (el) {
 }
 
 function addStorageItem () {
-  if (saved_select.options[saved_select.options.length - 1].value == storage.key(storage.length - 1)) return;
   let docFrag = document.createDocumentFragment();
   let option = document.createElement("option");
-  option.textContent = storage.key(storage.length - 1);
+  option.textContent = locKey.value;
   docFrag.appendChild(option);
   saved_select.appendChild(docFrag);
 }
@@ -293,46 +292,50 @@ saved_select.addEventListener('change', function(e) {
 
 savebtn.onclick = function () {
 
-  let myData = {
-    location: locKey.value,
-    ht: _ht.value,
-    hx: _hx.value,
-    r1x: _r1x.value,
-    r1y: _r1y.value,
-    r2x: _r2x.value,
-    r2y: _r2y.value,
-    r3x: _r3x.value,
-    r3y: _r3y.value,
-    r4x: _r4x.value,
-    r4y: _r4y.value,
-    l1x: _l1x.value,
-    l1y: _l1y.value,
-    l2x: _l2x.value,
-    l2y: _l2y.value,
-    l3x: _l3x.value,
-    l3y: _l3y.value,
-    l4x: _l4x.value,
-    l4y: _l4y.value,
-    r1c: r1c.textContent,
-    r1s: r1s.textContent,
-    r2c: r2c.textContent,
-    r2s: r2s.textContent,
-    r3c: r3c.textContent,
-    r3s: r3s.textContent,
-    r4c: r4c.textContent,
-    r4s: r4s.textContent,
-    l1c: l1c.textContent,
-    l1s: l1s.textContent,
-    l2c: l2c.textContent,
-    l2s: l2s.textContent,
-    l3c: l3c.textContent,
-    l3s: l3s.textContent,
-    l4c: l4c.textContent,
-    l4s: l4s.textContent,
-    _select: _select.value
-  };
-
   if (locKey.value) {
+    for (let i=0; i<storage.length; i++) {
+      if (storage.key(i) == locKey.value) return;
+    }
+
+    let myData = {
+      location: locKey.value,
+      ht: _ht.value,
+      hx: _hx.value,
+      r1x: _r1x.value,
+      r1y: _r1y.value,
+      r2x: _r2x.value,
+      r2y: _r2y.value,
+      r3x: _r3x.value,
+      r3y: _r3y.value,
+      r4x: _r4x.value,
+      r4y: _r4y.value,
+      l1x: _l1x.value,
+      l1y: _l1y.value,
+      l2x: _l2x.value,
+      l2y: _l2y.value,
+      l3x: _l3x.value,
+      l3y: _l3y.value,
+      l4x: _l4x.value,
+      l4y: _l4y.value,
+      r1c: r1c.textContent,
+      r1s: r1s.textContent,
+      r2c: r2c.textContent,
+      r2s: r2s.textContent,
+      r3c: r3c.textContent,
+      r3s: r3s.textContent,
+      r4c: r4c.textContent,
+      r4s: r4s.textContent,
+      l1c: l1c.textContent,
+      l1s: l1s.textContent,
+      l2c: l2c.textContent,
+      l2s: l2s.textContent,
+      l3c: l3c.textContent,
+      l3s: l3s.textContent,
+      l4c: l4c.textContent,
+      l4s: l4s.textContent,
+      _select: _select.value
+    };
+
     storage.setItem( locKey.value, JSON.stringify(myData));
     addStorageItem();
   }
