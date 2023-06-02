@@ -183,7 +183,7 @@ house.addEventListener('change', function(e) {
   let l2cText = `${l2_ceilPP}평[${l2_ceil_roll}롤]`;
   let l2sText = `${l2_sidePP}평[${l2_side_roll}롤][${l2_side_cake}폭]`;
   let l3cText = `${l3_ceilPP}평[${l3_ceil_roll}롤]`;
-  let l3sText = `${l3_sidePP}평[${l3_side_roll}롤][${l4_side_cake}폭]`;
+  let l3sText = `${l3_sidePP}평[${l3_side_roll}롤][${l3_side_cake}폭]`;
   let l4cText = `${l4_ceilPP}평[${l4_ceil_roll}롤]`;
   let l4sText = `${l4_sidePP}평[${l4_side_roll}롤][${l4_side_cake}폭]`;
 
