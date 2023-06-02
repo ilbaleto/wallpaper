@@ -50,7 +50,7 @@ function valueNum (el) {
 }
 
 function matchRexZero (el) {
- let re = /^0/;
+ let re = /^0평/;
  return (re.test(el)) ? '' : el;
 }
 
