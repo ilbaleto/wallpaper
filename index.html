@@ -13,15 +13,18 @@
         <fieldset>
           <legend>Please select your preferred contact method:</legend>
           <h3><input type="text" id="location" placeholder="Loctaion"></h3>
-          <select id="select" class="select">
-            <option value="53">소폭합지</option>
-            <option value="93">광푝합지</option>
-            <option value="106">실크벽지</option>
-          </select>     
+          <select id ="saved" class="mysel">
+            <option>Saved Location</option>
+          </select>      
           <div>
             <label>Ht </label>
             <input id="ht" type="number">
             <input id="hx" type="number">
+            <select id="select" class="select">
+              <option value="53">소폭합지</option>
+              <option value="93">광푝합지</option>
+              <option value="106">실크벽지</option>
+            </select>              
           </div>               
           <div>
             <label>R1 </label>
@@ -82,10 +85,9 @@
         </fieldset>
       </form>
       <div>
-        <select id ="saved" class="mysel">
-          <option>Saved Location</option>
-        </select>       
-        <input type="button" id="savebtn" class ="btn" value="Save">
+   
+        <button id="savebtn" class="btn">Save</button>
+        <button id="delbtn" class="btn">Delete</button>
       </div>
     </div>
     <script src="main.js"></script>

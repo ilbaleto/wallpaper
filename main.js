@@ -40,6 +40,7 @@ let l4s = document.getElementById("l4s");
 let saved_select = document.getElementById("saved");
 let _select = document.getElementById("select");
 let savebtn = document.getElementById("savebtn");
+let delbtn = document.getElementById("delbtn");
 
 let locKey = document.getElementById("location");
 let storage = localStorage;
@@ -54,7 +55,7 @@ function matchRexZero (el) {
  return (re.test(el)) ? '' : el;
 }
 
-function addStorageItem () {
+function addSelectItem () {
   let docFrag = document.createDocumentFragment();
   let option = document.createElement("option");
   option.textContent = locKey.value;
@@ -62,7 +63,7 @@ function addStorageItem () {
   saved_select.appendChild(docFrag);
 }
 
-function addStorageAll () {
+function addSelectAll () {
   let docFrag = document.createDocumentFragment();
   for (let i = 0; i < storage.length; i++) {
     let option = document.createElement("option");
@@ -75,7 +76,7 @@ function addStorageAll () {
 
 window.addEventListener("load", function() {
 
-  addStorageAll();
+  addSelectAll();
 
 });
 
@@ -335,10 +336,14 @@ savebtn.onclick = function () {
       l4s: l4s.textContent,
       _select: _select.value
     };
-
     storage.setItem( locKey.value, JSON.stringify(myData));
-    addStorageItem();
+    addSelectItem();
   }
 
+}
+
+delbtn.onclick = function () {
+  storage.removeItem(locKey.value);
+  location.reload();
 
 }

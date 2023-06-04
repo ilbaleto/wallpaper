@@ -19,7 +19,7 @@ input[type="text"] {
 
 
 input[type="number"] {
-	width: 3em;
+	width: 2.3em;
 }
 
 input::-webkit-outer-spin-button,
@@ -29,14 +29,13 @@ input::-webkit-inner-spin-button {
 }
 
 .btn {
-  width: 130px;
-  height: 40px;
+  width: 100px;
+  height: 30px;
   margin: 20px;
-  padding: 10px 25px;
+
   outline: none;
   border: 2px solid #000;
   font-family: 'Lato', sans-serif;
-  font-weight: 500;
   font-size: 18px;
   background: transparent;
   cursor: pointer;
@@ -58,4 +57,11 @@ h3 {
 	display: inline-block;
 }
 
+span {
+	font-size:14px;
+}
+
+span:nth-of-type(2) {
+	background-color: lightcoral;
+}
 
